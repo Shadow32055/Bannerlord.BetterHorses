@@ -7,8 +7,8 @@ namespace BetterHorses.Behaviors {
 
         public override MissionBehaviorType BehaviorType => MissionBehaviorType.Other;
 
-        public override void OnAgentHit(Agent affectedAgent, Agent affectorAgent, int damage, in MissionWeapon affectorWeapon) {
-            base.OnAgentHit(affectedAgent, affectorAgent, damage, affectorWeapon);
+        public override void OnAgentHit(Agent affectedAgent, Agent affectorAgent, in MissionWeapon affectorWeapon, in Blow blow, in AttackCollisionData attackCollisionData) {
+            base.OnAgentHit(affectedAgent, affectorAgent, affectorWeapon, blow, attackCollisionData);
 
             if (!Helper.settings.InvulnerableMount)
                 return;
