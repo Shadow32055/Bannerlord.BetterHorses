@@ -11,9 +11,8 @@ namespace BetterHorses.Patches {
     class Patches {
 
         [HarmonyPostfix]
-        [HarmonyPatch(typeof(Mission), "DecideMountRearedByBlow")]
-        public static void DecideMountRearedByBlow(Agent attackerAgent, Agent victimAgent, in AttackCollisionData collisionData, WeaponComponentData attackerWeapon,
-            float rearDamageThresholdMultiplier, Vec3 blowDirection, ref Blow blow) {
+        [HarmonyPatch(typeof(MissionCombatMechanicsHelper), "DecideMountRearedByBlow")]
+        public static void DecideMountRearedByBlow(Agent attackerAgent, Agent victimAgent, in AttackCollisionData collisionData, WeaponComponentData attackerWeapon, ref Blow blow) {
 
             if (!Helper.settings.MountsDontRear)
                 return;
@@ -25,9 +24,9 @@ namespace BetterHorses.Patches {
         }
 
         [HarmonyPostfix]
-        [HarmonyPatch(typeof(Mission), "ComputeBlowMagnitudeFromHorseCharge")]
-        public static void ComputeBlowMagnitudeFromHorseCharge(ref AttackCollisionData acd, Vec2 attackerAgentMovementDirection, Vec2 attackerAgentVelocity, 
-            float agentMountChargeDamageProperty, Vec2 victimAgentVelocity, Vec3 victimAgentPosition, ref float baseMagnitude, ref float specialMagnitude) {
+        [HarmonyPatch(typeof(MissionCombatMechanicsHelper), "ComputeBlowMagnitudeFromHorseCharge")]
+        public static void ComputeBlowMagnitudeFromHorseCharge(ref AttackInformation attackInformation, ref AttackCollisionData acd, Vec2 attackerAgentVelocity, Vec2 victimAgentVelocity,
+            ref float baseMagnitude, ref float specialMagnitude) {
 
             specialMagnitude *= Helper.settings.ChargeDamage;
             baseMagnitude *= Helper.settings.ChargeDamage;
@@ -43,20 +42,19 @@ namespace BetterHorses.Patches {
 
             return true;
         }*/
-
+        /*
         [HarmonyPostfix]
         [HarmonyPatch(typeof(CustomBattleAgentStatCalculateModel), "UpdateAgentStats")]
         public static void UpdateAgentStats(Agent agent, ref AgentDrivenProperties agentDrivenProperties) {
-            Helper.DisplayMsg("Called!");
+            //Helper.DisplayMsg("Called!");
             //if (Helper.settings.MountsSlowDown) {
 
             if (!agent.IsHuman) {
-                    float num = agent.Health / agent.HealthLimit;
-                    agentDrivenProperties.MountSpeed *= num;
-                    Helper.DisplayMsg(agentDrivenProperties.MountSpeed.ToString());
-                }
+                float num = agent.Health / agent.HealthLimit;
+                agentDrivenProperties.MountSpeed *= num;
+                Helper.DisplayMsg(agentDrivenProperties.MountSpeed.ToString());
+            }
             //}
-
-        }
+        }*/
     }
 }
