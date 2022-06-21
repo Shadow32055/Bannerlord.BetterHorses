@@ -14,7 +14,7 @@ namespace BetterHorses.Settings {
         [SettingPropertyBool("Only Player?", Order = 0, RequireRestart = false, HintText = "Whether player only horses dont rear when hit.")]
         public bool MountsDontRearPlayerOnly { get; set; } = false;
 
-        [SettingPropertyFloatingInteger("Charge Damage", 0f, 100f, "0.0", Order = 0, RequireRestart = false, HintText = "Multiplier on existing charge damage, set to 1 for vanilla charge damage")]
+        [SettingPropertyFloatingInteger("Charge Velocity Multiplier", 0f, 100f, "0.0", Order = 0, RequireRestart = false, HintText = "Causes increased charge damage due to multipling the attacker velocity. No speed adjustments, just multiplies the velocity by the selected amount in the charge damage caluclation. Set to 1 for vanilla, .5 for half charge velocity(damage).")]
         public float ChargeDamage { get; set; } = 1f;
 
         [SettingPropertyBool("Invulnerable Horse", Order = 0, RequireRestart = false, HintText = "Whether player mount can take damage or not. Only while mounted.")]
