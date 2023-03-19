@@ -3,14 +3,14 @@ using System.IO;
 using TaleWorlds.Library;
 using BetterHorses.Utils;
 using System.Xml.Serialization;
-using MCM.Abstractions.Settings.Base.Global;
 using System.Xml;
 using System.Text;
+using MCM.Abstractions.Base.Global;
 
 namespace BetterHorses.Settings {
     public class SettingsManager {
 
-        private static ISettings instance;
+        private static ISettings? instance;
         private static string path = BasePath.Name + "Modules/" + Helper.modName + "/config.xml";
 		private static FileInfo configFile = new FileInfo(path);
 

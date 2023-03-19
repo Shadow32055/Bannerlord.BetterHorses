@@ -66,9 +66,9 @@ namespace BetterHorses.Behaviors {
         private void MoveHorse(WorldPosition pos) {
             float num = pos.GetGroundVec3().Distance(this.horseAgent.Position);
             if (num > 20f) {
-                horseAgent.SetScriptedPositionAndDirection(ref pos, 0f, true, Agent.AIScriptedFrameFlags.None, "");
+                horseAgent.SetScriptedPositionAndDirection(ref pos, 0f, true, Agent.AIScriptedFrameFlags.None);
             } else if (num > 10f) {
-                horseAgent.SetScriptedPositionAndDirection(ref pos, 0f, true, Agent.AIScriptedFrameFlags.DoNotRun, "");
+                horseAgent.SetScriptedPositionAndDirection(ref pos, 0f, true, Agent.AIScriptedFrameFlags.DoNotRun);
             }
         }
     }
