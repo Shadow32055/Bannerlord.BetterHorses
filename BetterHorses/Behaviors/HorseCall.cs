@@ -7,7 +7,7 @@ using TaleWorlds.MountAndBlade;
 namespace BetterHorses.Behaviors {
     class HorseCall : MissionBehavior {
 
-        private Agent horseAgent;
+        private Agent? horseAgent;
 
         private WorldPosition pos;
 
@@ -50,7 +50,8 @@ namespace BetterHorses.Behaviors {
                                     MoveHorse(mission.MainAgent.GetWorldPosition());
                                 } else {
                                     Helper.DisplayFriendlyMsg("Horse will stay put.");
-                                    pos = mission.MainAgent.GetWorldPosition();
+                                    pos = horseAgent.GetWorldPosition();
+
                                 }
                             }
                         }
@@ -64,12 +65,7 @@ namespace BetterHorses.Behaviors {
         }
 
         private void MoveHorse(WorldPosition pos) {
-            float num = pos.GetGroundVec3().Distance(this.horseAgent.Position);
-            if (num > 20f) {
-                horseAgent.SetScriptedPositionAndDirection(ref pos, 0f, true, Agent.AIScriptedFrameFlags.None);
-            } else if (num > 10f) {
-                horseAgent.SetScriptedPositionAndDirection(ref pos, 0f, true, Agent.AIScriptedFrameFlags.DoNotRun);
-            }
+            horseAgent.SetScriptedPosition(ref pos,true);
         }
     }
 }
