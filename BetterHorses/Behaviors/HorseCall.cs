@@ -1,6 +1,6 @@
 ﻿using System;
 using TaleWorlds.Engine;
-using BetterHorses.Utils;
+using BetterCore.Utils;
 using TaleWorlds.InputSystem;
 using TaleWorlds.MountAndBlade;
 
@@ -42,14 +42,14 @@ namespace BetterHorses.Behaviors {
                                 }
                             }
 
-                            if (Input.IsKeyPressed(Helper.callKey)) {
+                            if (Input.IsKeyPressed(SubModule.callKey)) {
                                 horseStay = !horseStay;
 
                                 if (!horseStay) {
-                                    Helper.DisplayFriendlyMsg("Horse will follow you.");
+                                    Logger.SendMessage("Horse will follow you.", Severity.Good);
                                     MoveHorse(mission.MainAgent.GetWorldPosition());
                                 } else {
-                                    Helper.DisplayFriendlyMsg("Horse will stay put.");
+                                    Logger.SendMessage("Horse will stay put.", Severity.Good);
                                     pos = horseAgent.GetWorldPosition();
 
                                 }
@@ -60,7 +60,7 @@ namespace BetterHorses.Behaviors {
                     positionUpdate = MissionTime.Zero;
                 }
             } catch (Exception e) {
-                Helper.WriteToLog("Problem with horse call, cause: " + e);
+                Logger.SendMessage("Problem with horse call, cause: " + e, Severity.High);
             }
         }
 

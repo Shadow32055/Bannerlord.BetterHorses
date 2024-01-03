@@ -1,5 +1,4 @@
-﻿using BetterHorses.Utils;
-using TaleWorlds.MountAndBlade;
+﻿using TaleWorlds.MountAndBlade;
 
 namespace BetterHorses.Behaviors {
     class HorseSpeed : MissionBehavior { 

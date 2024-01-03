@@ -4,7 +4,7 @@ using MCM.Abstractions.Attributes.v2;
 using MCM.Abstractions.Base.Global;
 
 namespace BetterHorses.Settings {
-    internal class MCMSettings : AttributeGlobalSettings<MCMSettings>, ISettings {
+    public class MCMSettings : AttributeGlobalSettings<MCMSettings> {
 
         [SettingPropertyGroup("Horse Rearing")]
         [SettingPropertyBool("Mounts Don't Rear", Order = 0, RequireRestart = false, HintText = "Whether horses rear when hit.")]

@@ -1,9 +1,7 @@
 ﻿using HarmonyLib;
 using TaleWorlds.Core;
-using BetterHorses.Utils;
 using TaleWorlds.Library;
 using TaleWorlds.MountAndBlade;
-//using static HarmonyLib.AccessTools;
 
 namespace BetterHorses.Patches {
 
@@ -15,7 +13,7 @@ namespace BetterHorses.Patches {
         public static void DecideMountRearedByBlow(Agent attackerAgent, Agent victimAgent, in AttackCollisionData collisionData, WeaponComponentData attackerWeapon, ref Blow blow, ref bool __result) {
 
             //If mount rearing is enabled (possible) skip eval
-            if (!Helper.settings.MountsDontRear) {
+            if (!SubModule._settings.MountsDontRear) {
                 //Helper.DisplayFriendlyMsg("mounts dont rear is false");
                 return;
             }
@@ -26,7 +24,7 @@ namespace BetterHorses.Patches {
             }
 
             //If only players pervent rearing and the victim is AI
-            if (Helper.settings.MountsDontRearPlayerOnly && victimAgent.RiderAgent.IsAIControlled) {
+            if (SubModule._settings.MountsDontRearPlayerOnly && victimAgent.RiderAgent.IsAIControlled) {
                 //Helper.DisplayFriendlyMsg("Player only and victimAgent is AI, name = " + victimAgent.Name);
                 return;
             }
@@ -40,7 +38,7 @@ namespace BetterHorses.Patches {
         public static bool ComputeBlowMagnitudeFromHorseCharge(ref AttackInformation attackInformation, ref AttackCollisionData acd, Vec2 attackerAgentVelocity, Vec2 victimAgentVelocity,
             ref float baseMagnitude, ref float specialMagnitude) {
 
-            attackerAgentVelocity = attackerAgentVelocity * Helper.settings.ChargeDamage;
+            attackerAgentVelocity = attackerAgentVelocity * SubModule._settings.ChargeDamage;
 
             Vec2 attackerAgentMovementDirection = attackInformation.AttackerAgentMovementDirection;
             Vec2 v = attackerAgentMovementDirection * Vec2.DotProduct(victimAgentVelocity, attackerAgentMovementDirection);

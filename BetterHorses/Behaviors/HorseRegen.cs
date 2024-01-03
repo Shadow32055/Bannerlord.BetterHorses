@@ -1,5 +1,5 @@
 ﻿using System;
-using BetterHorses.Utils;
+using BetterCore.Utils;
 using TaleWorlds.MountAndBlade;
 
 namespace BetterHorses.Behaviors {
@@ -19,7 +19,7 @@ namespace BetterHorses.Behaviors {
 				if (mission != null && mission.MainAgent != null) {
 
 
-					if (Helper.settings.MountHealthRegenAmount > 0) {
+					if (SubModule._settings.MountHealthRegenAmount > 0) {
 						if (mission.MainAgent.HasMount) {
 							if (this.nextHealMount.IsPast) {
 
@@ -29,11 +29,11 @@ namespace BetterHorses.Behaviors {
 
 								if (this.lastHealthMount > mission.MainAgent.MountAgent.Health) {
 									tookDamageMount = true;
-									this.nextHealMount = MissionTime.SecondsFromNow(Helper.settings.MountRegenDamageDelay);
+									this.nextHealMount = MissionTime.SecondsFromNow(SubModule._settings.MountRegenDamageDelay);
 								} else {
-									this.nextHealMount = MissionTime.SecondsFromNow(Helper.settings.MountHealthRegenInterval);
+									this.nextHealMount = MissionTime.SecondsFromNow(SubModule._settings.MountHealthRegenInterval);
 
-									float healAmount = Helper.settings.MountHealthRegenAmount;
+									float healAmount = SubModule._settings.MountHealthRegenAmount;
 
 								
 
@@ -49,7 +49,7 @@ namespace BetterHorses.Behaviors {
 					this.nextHealMount = MissionTime.Zero;
 				}
 			} catch (Exception e) {
-				Helper.WriteToLog("Problem with health regen, cause: " + e);
+				Logger.SendMessage("Problem with health regen, cause: " + e, Severity.High);
 			}
 		}
 

@@ -1,6 +1,4 @@
-﻿using TaleWorlds.Core;
-using BetterHorses.Utils;
-using TaleWorlds.MountAndBlade;
+﻿using TaleWorlds.MountAndBlade;
 
 namespace BetterHorses.Behaviors {
     class GodHorse : MissionBehavior {
@@ -10,7 +8,7 @@ namespace BetterHorses.Behaviors {
         public override void OnAgentHit(Agent affectedAgent, Agent affectorAgent, in MissionWeapon affectorWeapon, in Blow blow, in AttackCollisionData attackCollisionData) {
             base.OnAgentHit(affectedAgent, affectorAgent, affectorWeapon, blow, attackCollisionData);
 
-            if (!Helper.settings.InvulnerableMount)
+            if (!SubModule._settings.InvulnerableMount)
                 return;
 
             if (affectedAgent == Agent.Main.MountAgent) {
