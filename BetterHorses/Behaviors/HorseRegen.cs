@@ -1,5 +1,5 @@
-﻿using System;
-using BetterCore.Utils;
+﻿using BetterCore.Utils;
+using System;
 using TaleWorlds.MountAndBlade;
 
 namespace BetterHorses.Behaviors {
@@ -10,7 +10,6 @@ namespace BetterHorses.Behaviors {
 
 		public override MissionBehaviorType BehaviorType => MissionBehaviorType.Other;
 
-
 		public override void OnMissionTick(float dt) {
 			base.OnMissionTick(dt);
 
@@ -19,7 +18,7 @@ namespace BetterHorses.Behaviors {
 				if (mission != null && mission.MainAgent != null) {
 
 
-					if (SubModule._settings.MountHealthRegenAmount > 0) {
+					if (BetterHorses.Settings.MountHealthRegenAmount > 0) {
 						if (mission.MainAgent.HasMount) {
 							if (this.nextHealMount.IsPast) {
 
@@ -29,11 +28,11 @@ namespace BetterHorses.Behaviors {
 
 								if (this.lastHealthMount > mission.MainAgent.MountAgent.Health) {
 									tookDamageMount = true;
-									this.nextHealMount = MissionTime.SecondsFromNow(SubModule._settings.MountRegenDamageDelay);
+									this.nextHealMount = MissionTime.SecondsFromNow(BetterHorses.Settings.MountRegenDamageDelay);
 								} else {
-									this.nextHealMount = MissionTime.SecondsFromNow(SubModule._settings.MountHealthRegenInterval);
+									this.nextHealMount = MissionTime.SecondsFromNow(BetterHorses.Settings.MountHealthRegenInterval);
 
-									float healAmount = SubModule._settings.MountHealthRegenAmount;
+									float healAmount = BetterHorses.Settings.MountHealthRegenAmount;
 
 								
 
@@ -49,7 +48,7 @@ namespace BetterHorses.Behaviors {
 					this.nextHealMount = MissionTime.Zero;
 				}
 			} catch (Exception e) {
-				Logger.SendMessage("Problem with health regen, cause: " + e, Severity.High);
+				NotifyHelper.ReportError(BetterHorses.ModName, "Problem with health regen, cause: " + e);
 			}
 		}
 
@@ -59,6 +58,7 @@ namespace BetterHorses.Behaviors {
 
 				
 				agent.Health += healAmount;
+				agent.UpdateAgentStats();
 				//agent.SetAgentDrivenPropertyValueFromConsole(TaleWorlds.Core.DrivenProperty.MountSpeed, 10);
 			}
 		}

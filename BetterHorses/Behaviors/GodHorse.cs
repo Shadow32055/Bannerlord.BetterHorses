@@ -8,7 +8,7 @@ namespace BetterHorses.Behaviors {
         public override void OnAgentHit(Agent affectedAgent, Agent affectorAgent, in MissionWeapon affectorWeapon, in Blow blow, in AttackCollisionData attackCollisionData) {
             base.OnAgentHit(affectedAgent, affectorAgent, affectorWeapon, blow, attackCollisionData);
 
-            if (!SubModule._settings.InvulnerableMount)
+            if (!BetterHorses.Settings.InvulnerableMount)
                 return;
 
             if (affectedAgent == Agent.Main.MountAgent) {
