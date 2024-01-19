@@ -3,70 +3,81 @@ using TaleWorlds.Engine;
 using BetterCore.Utils;
 using TaleWorlds.InputSystem;
 using TaleWorlds.MountAndBlade;
-using BetterHorses.Localizations;
 using TaleWorlds.Localization;
 
-namespace BetterHorses.Behaviors {
+namespace BetterHorses.Behaviors
+{
     class HorseCall : MissionBehavior {
 
         private Agent? horseAgent;
 
-        private WorldPosition pos;
+        private WorldPosition stayPosition;
 
         MissionTime positionUpdate;
 
-        private bool horseStay = false;
+        private bool horseStay = true;
 
         public override MissionBehaviorType BehaviorType => MissionBehaviorType.Other;
 
+        public override void OnAgentDismount(Agent agent) {
+            base.OnAgentDismount(agent);
+            if (agent != Mission.Current.MainAgent)
+                return;
+
+            if (horseAgent == null)
+                return;
+
+            stayPosition = horseAgent.GetWorldPosition();
+        }
+
+        public override void AfterStart() {
+            base.AfterStart();
+
+            if (Mission.Current.MainAgent.HasMount)
+                horseAgent = Mission.Current.MainAgent.MountAgent;
+        }
         public override void OnMissionTick(float dt) {
             base.OnMissionTick(dt);
             try {
-                Mission mission = Mission.Current;
+                if (Mission.Current == null)
+                    return;
 
-                if (mission != null && mission.MainAgent != null) {
-                    if (mission.MainAgent.HasMount) {
-                        horseAgent = mission.MainAgent.MountAgent;
-                    }
+                if (horseAgent == null)
+                    return;
 
-                    if (!mission.MainAgent.HasMount) {
-                        if (horseAgent != null) {
-
-                            if (horseStay) {
-                                if (positionUpdate.IsPast) {
-                                    MoveHorse(pos);
-                                    positionUpdate = MissionTime.SecondsFromNow(5);
-                                }
-                            } else {
-                                if (positionUpdate.IsPast) {
-                                    MoveHorse(mission.MainAgent.GetWorldPosition());
-                                    positionUpdate = MissionTime.SecondsFromNow(5);
-                                }
-                            }
-
-                            if (Input.IsKeyPressed(BetterHorses.CallKey)) {
-                                horseStay = !horseStay;
-
-                                if (!horseStay) {
-                                    NotifyHelper.ChatMessage(new TextObject(RefValues.FollowText).ToString(), MsgType.Good);
-                                    MoveHorse(mission.MainAgent.GetWorldPosition());
-                                } else {
-                                    NotifyHelper.ChatMessage(new TextObject(RefValues.StayText).ToString(), MsgType.Good);
-                                    pos = horseAgent.GetWorldPosition();
-
-                                }
-                            }
-                        }
+                if (horseStay) {
+                    if (positionUpdate.IsPast) {
+                        MoveHorse(stayPosition);
+                        positionUpdate = MissionTime.SecondsFromNow(5);
                     }
                 } else {
-                    positionUpdate = MissionTime.Zero;
+                    if (positionUpdate.IsPast) {
+                        MoveHorse(Mission.Current.MainAgent.GetWorldPosition());
+                        positionUpdate = MissionTime.SecondsFromNow(5);
+                    }
+                }
+
+                if (Input.IsKeyPressed(BetterHorses.CallKey)) {
+                    horseStay = !horseStay;
+
+                    if (!horseStay) {
+                        NotifyHelper.WriteMessage(new TextObject(Strings.FollowText).ToString(), MsgType.Good);
+                        MoveHorse(Mission.Current.MainAgent.GetWorldPosition());
+                    } else {
+                        NotifyHelper.WriteMessage(new TextObject(Strings.StayText).ToString(), MsgType.Good);
+                        stayPosition = horseAgent.GetWorldPosition();
+
+                    }
                 }
             } catch (Exception e) {
-                NotifyHelper.ReportError(BetterHorses.ModName, "Problem with horse call, cause: " + e);
+                NotifyHelper.WriteError(BetterHorses.ModName, "Problem with horse call, cause: " + e);
             }
         }
 
         private void MoveHorse(WorldPosition pos) {
+            if (horseAgent == null)
+                return;
+
             horseAgent.SetScriptedPosition(ref pos,true);
         }
     }

@@ -1,78 +1,78 @@
-﻿using BetterHorses.Localizations;
-using MCM.Abstractions.Attributes;
+﻿using MCM.Abstractions.Attributes;
 using MCM.Abstractions.Attributes.v1;
 using MCM.Abstractions.Attributes.v2;
 using MCM.Abstractions.Base.Global;
 
-namespace BetterHorses.Settings {
+namespace BetterHorses.Settings
+{
     public class MCMSettings : AttributeGlobalSettings<MCMSettings> {
 
-        [SettingPropertyGroup(RefValues.RearingText)]
-        [SettingPropertyBool(RefValues.MountRearText, Order = 0, RequireRestart = false, HintText = RefValues.MountRearHint)]
+        [SettingPropertyGroup(Strings.RearingText)]
+        [SettingPropertyBool(Strings.MountRearText, Order = 0, RequireRestart = false, HintText = Strings.MountRearHint)]
         public bool MountsDontRear { get; set; } = false;
 
-        [SettingPropertyGroup(RefValues.RearingText)]
-        [SettingPropertyBool(RefValues.PlayerText, Order = 0, RequireRestart = false, HintText = RefValues.PlayerHint)]
+        [SettingPropertyGroup(Strings.RearingText)]
+        [SettingPropertyBool(Strings.PlayerText, Order = 0, RequireRestart = false, HintText = Strings.PlayerHint)]
         public bool MountsDontRearPlayerOnly { get; set; } = false;
 
-        [SettingPropertyGroup(RefValues.AdjText)]
-        [SettingPropertyFloatingInteger(RefValues.ChargeText, 0f, 100f, "0.0", Order = 0, RequireRestart = false, HintText = RefValues.ChargeHint)]
+        [SettingPropertyGroup(Strings.AdjText)]
+        [SettingPropertyFloatingInteger(Strings.ChargeText, 0f, 100f, "0.0", Order = 0, RequireRestart = false, HintText = Strings.ChargeHint)]
         public float ChargeDamage { get; set; } = 1f;
 
-        [SettingPropertyGroup(RefValues.AdjText)]
-        [SettingPropertyFloatingInteger(RefValues.SpeedText, 0f, 100f, "0.0", Order = 0, RequireRestart = false, HintText = RefValues.SpeedHint)]
+        [SettingPropertyGroup(Strings.AdjText)]
+        [SettingPropertyFloatingInteger(Strings.SpeedText, 0f, 100f, "0.0", Order = 0, RequireRestart = false, HintText = Strings.SpeedHint)]
         public float Speed { get; set; } = 1f;
 
-        [SettingPropertyGroup(RefValues.AdjText)]
-        [SettingPropertyFloatingInteger(RefValues.ManeuverText, 0f, 4f, "0.0", Order = 0, RequireRestart = false, HintText = RefValues.ManeuverHint)]
+        [SettingPropertyGroup(Strings.AdjText)]
+        [SettingPropertyFloatingInteger(Strings.ManeuverText, 0f, 4f, "0.0", Order = 0, RequireRestart = false, HintText = Strings.ManeuverHint)]
         public float Maneuver { get; set; } = 1f;
 
-        [SettingPropertyGroup(RefValues.AdjText)]
-        [SettingPropertyFloatingInteger(RefValues.AccelText, 0f, 100f, "0.0", Order = 0, RequireRestart = false, HintText = RefValues.AccelHint)]
+        [SettingPropertyGroup(Strings.AdjText)]
+        [SettingPropertyFloatingInteger(Strings.AccelText, 0f, 100f, "0.0", Order = 0, RequireRestart = false, HintText = Strings.AccelHint)]
         public float Acceleration { get; set; } = 1f;
 
-        [SettingPropertyGroup(RefValues.AdjText)]
-        [SettingPropertyBool(RefValues.PlayerText, Order = 0, RequireRestart = false, HintText = RefValues.PlayerHint)]
+        [SettingPropertyGroup(Strings.AdjText)]
+        [SettingPropertyBool(Strings.PlayerText, Order = 0, RequireRestart = false, HintText = Strings.PlayerHint)]
         public bool AdjustmentsPlayerOnly { get; set; } = false;
 
-        [SettingPropertyGroup(RefValues.GodMountText)]
-        [SettingPropertyBool(RefValues.InvulnerableText, IsToggle = true, Order = 0, RequireRestart = false, HintText = RefValues.InvulnerableHint)]
+        [SettingPropertyGroup(Strings.GodMountText)]
+        [SettingPropertyBool(Strings.InvulnerableText, IsToggle = true, Order = 0, RequireRestart = false, HintText = Strings.InvulnerableHint)]
         public bool InvulnerableMount { get; set; } = false;
 
-        [SettingPropertyGroup(RefValues.CommandText)]
-        [SettingPropertyBool(RefValues.MountCommandsText, Order = 0, IsToggle = true, RequireRestart = false, HintText = RefValues.MountCommandsHint)]
+        [SettingPropertyGroup(Strings.CommandText)]
+        [SettingPropertyBool(Strings.MountCommandsText, Order = 0, IsToggle = true, RequireRestart = false, HintText = Strings.MountCommandsHint)]
         public bool CommandableMount { get; set; } = false;
 
-        [SettingPropertyGroup(RefValues.CommandText)]
-        [SettingProperty(RefValues.KeyText, Order = 0, RequireRestart = true, HintText = RefValues.KeyHint)]
+        [SettingPropertyGroup(Strings.CommandText)]
+        [SettingProperty(Strings.KeyText, Order = 0, RequireRestart = true, HintText = Strings.KeyHint)]
         public string CallKey { get; set; } = "Q";
 
-        [SettingPropertyGroup(RefValues.RegenText)]
-        [SettingPropertyBool(RefValues.AllowRegenText, Order = 0, IsToggle = true, RequireRestart = false, HintText = RefValues.AllowRegenHint)]
+        [SettingPropertyGroup(Strings.RegenText)]
+        [SettingPropertyBool(Strings.AllowRegenText, Order = 0, IsToggle = true, RequireRestart = false, HintText = Strings.AllowRegenHint)]
         public bool AllowRegen { get; set; } = false;
 
-        [SettingPropertyGroup(RefValues.RegenText)]
-        [SettingPropertyFloatingInteger(RefValues.RegenAmountText, 0f, 300f, "0.0 HP", Order = 0, RequireRestart = false, HintText = RefValues.RegenAmountHint)]
+        [SettingPropertyGroup(Strings.RegenText)]
+        [SettingPropertyFloatingInteger(Strings.RegenAmountText, 0f, 300f, "0.0 HP", Order = 0, RequireRestart = false, HintText = Strings.RegenAmountHint)]
         public float MountHealthRegenAmount { get; set; } = 0;
 
-        [SettingPropertyGroup(RefValues.RegenText)]
-        [SettingPropertyFloatingInteger(RefValues.RegenIntervalText, 1f, 120f, "0.0 Seconds", Order = 0, RequireRestart = false, HintText = RefValues.RegenIntervalHint)]
+        [SettingPropertyGroup(Strings.RegenText)]
+        [SettingPropertyFloatingInteger(Strings.RegenIntervalText, 1f, 120f, "0.0 Seconds", Order = 0, RequireRestart = false, HintText = Strings.RegenIntervalHint)]
         public float MountHealthRegenInterval { get; set; } = 1;
 
-        [SettingPropertyGroup(RefValues.RegenText)]
-        [SettingPropertyFloatingInteger(RefValues.RegenDelayText, 1f, 120f, "0.0 Seconds", Order = 0, RequireRestart = false, HintText = RefValues.RegenDelayHint)]
+        [SettingPropertyGroup(Strings.RegenText)]
+        [SettingPropertyFloatingInteger(Strings.RegenDelayText, 1f, 120f, "0.0 Seconds", Order = 0, RequireRestart = false, HintText = Strings.RegenDelayHint)]
         public float MountRegenDamageDelay { get; set; } = 1;
 
-        [SettingPropertyGroup(RefValues.RestockText)]
-        [SettingPropertyBool(RefValues.AllowRestockText, Order = 0, IsToggle = true, RequireRestart = false, HintText = RefValues.AllowRestockHint)]
+        [SettingPropertyGroup(Strings.RestockText)]
+        [SettingPropertyBool(Strings.AllowRestockText, Order = 0, IsToggle = true, RequireRestart = false, HintText = Strings.AllowRestockHint)]
         public bool AllowResstocking { get; set; } = false;
 
-        [SettingPropertyGroup(RefValues.RestockText)]
-        [SettingPropertyInteger(RefValues.RestockTimesText, 1, 100, "0", Order = 0, RequireRestart = false, HintText = RefValues.RestockTimesHint)]
+        [SettingPropertyGroup(Strings.RestockText)]
+        [SettingPropertyInteger(Strings.RestockTimesText, 1, 100, "0", Order = 0, RequireRestart = false, HintText = Strings.RestockTimesHint)]
         public int StockTimes { get; set; } = 3;
 
-        [SettingPropertyGroup(RefValues.RestockText)]
-        [SettingProperty(RefValues.KeyText, Order = 0, RequireRestart = true, HintText = RefValues.KeyHint)]
+        [SettingPropertyGroup(Strings.RestockText)]
+        [SettingProperty(Strings.KeyText, Order = 0, RequireRestart = true, HintText = Strings.KeyHint)]
         public string StockKey { get; set; } = "E";
 
         //[SettingPropertyBool("Mount speed based on health", Order = 0, RequireRestart = false, HintText = "Whether mounts slow down based on health. 50% health means horse moves at 50% speed")]

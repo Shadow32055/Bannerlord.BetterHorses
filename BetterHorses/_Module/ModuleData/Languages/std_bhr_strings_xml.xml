@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<base xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" type="string">
+	<tags>
+		<tag language="English" />
+	</tags>
+	<strings>
+		<string id="BHR_v94tx5" text="Mount Rearing"/>
+		<string id="BHR_CCvKIi" text="Mount Adjustments"/>
+		<string id="BHR_RLGBPF" text="Invulnerable Mount"/>
+		<string id="BHR_XshpXv" text="Mount Commands"/>
+		<string id="BHR_t58FZY" text="Regeneration"/>
+		<string id="BHR_1gFv7J" text="Restock"/>
+
+		<string id="BHR_uwB0Hp" text="Mount will follow you."/>
+		<string id="BHR_4fzaol" text="Mount will stay put."/>
+
+		<string id="BHR_lalihN" text="Mounts Don't Rear"/>
+		<string id="BHR_KRpAl4" text="Should mounts rear when hit"/>
+		<string id="BHR_LBgVTB" text="Charge Damage"/>
+		<string id="BHR_1UCCxg" text="Change charge damage by a percent value"/>
+		<string id="BHR_L59iLT" text="Speed"/>
+		<string id="BHR_oFVO8r" text="Change speed by a percent value"/>
+		<string id="BHR_D3jaWJ" text="Maneuver"/>
+		<string id="BHR_y40DN2" text="Change maneuver by a percent value"/>
+		<string id="BHR_uP2gxB" text="Acceleration"/>
+		<string id="BHR_bysqbZ" text="Change acceleration by a percent value"/>
+		<string id="BHR_FBBR4W" text="Player Only"/>
+		<string id="BHR_YBWPXK" text="Should only impact the player"/>
+		<string id="BHR_8M69MF" text="Invulnerable Mount"/>
+		<string id="BHR_oFj0DS" text="Should player mount can take damage or not. Only while mounted"/>
+		<string id="BHR_MsDsIS" text="Mount Commands"/>
+		<string id="BHR_ta4QFj" text="Should or not to enable mount commands, stay and follow"/>
+		<string id="BHR_KvjKvF" text="Key"/>
+		<string id="BHR_7xRBer" text="What key to use for associated action. Examples 'Q', 'Numpad0'"/>
+		<string id="BHR_sJR9xp" text="Allow Mount Regen"/>
+		<string id="BHR_pfJKf2" text="Should the player mount regenerate health over time"/>
+		<string id="BHR_EofUVo" text="Mount Health Regen Amount"/>
+		<string id="BHR_JDuib4" text="Percentage of health restored each regeneration"/>
+		<string id="BHR_Qlxprz" text="Mount Health Regen Interval"/>
+		<string id="BHR_5ikEoP" text="Time between each regeneration"/>
+		<string id="BHR_UJtVx0" text="Mount Regen Damage Delay"/>
+		<string id="BHR_M7tpYU" text="Time until next heal after damage"/>
+		<string id="BHR_QpwQU3" text="Allow restocking"/>
+		<string id="BHR_LK0Y2X" text="Should you be able to get ammo back from your mount"/>
+		<string id="BHR_8GKCt3" text="Restock times"/>
+		<string id="BHR_SPUG8I" text="How many times can you get ammo from your horse"/>
+	</strings>
+</base>

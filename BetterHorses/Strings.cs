@@ -1,5 +1,5 @@
-﻿namespace BetterHorses.Localizations {
-    public class RefValues {
+﻿namespace BetterHorses {
+    public class Strings {
 
         public const string RearingText = "{=BHR_v94tx5}Mount Rearing";
         public const string AdjText = "{=BHR_CCvKIi}Mount Adjustments";
@@ -41,7 +41,5 @@
         public const string AllowRestockHint = "{=BHR_LK0Y2X}Should you be able to get ammo back from your mount";
         public const string RestockTimesText = "{=BHR_8GKCt3}Restock times";
         public const string RestockTimesHint = "{=BHR_SPUG8I}How many times can you get ammo from your horse";
-
-
     }
 }

@@ -28,7 +28,7 @@ namespace BetterHorses.Patches {
 
                 }
             } catch (Exception e) {
-                NotifyHelper.ReportError(BetterHorses.ModName, "SandboxAgentStatCalculateModel.UpdateAgentStats threw exception: " + e);
+                NotifyHelper.WriteError(BetterHorses.ModName, "SandboxAgentStatCalculateModel.UpdateAgentStats threw exception: " + e);
             }
         }
     }
