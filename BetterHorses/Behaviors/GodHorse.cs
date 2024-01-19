@@ -1,6 +1,4 @@
 ﻿using BetterCore.Utils;
-using BetterHorses.Settings;
-using MCM.Abstractions.Base.Global;
 using System;
 using TaleWorlds.MountAndBlade;
 

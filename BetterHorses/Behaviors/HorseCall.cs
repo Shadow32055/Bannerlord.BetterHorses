@@ -1,12 +1,11 @@
-﻿using System;
+﻿using BetterCore.Utils;
+using System;
 using TaleWorlds.Engine;
-using BetterCore.Utils;
 using TaleWorlds.InputSystem;
-using TaleWorlds.MountAndBlade;
 using TaleWorlds.Localization;
+using TaleWorlds.MountAndBlade;
 
-namespace BetterHorses.Behaviors
-{
+namespace BetterHorses.Behaviors {
     class HorseCall : MissionBehavior {
 
         private Agent? horseAgent;

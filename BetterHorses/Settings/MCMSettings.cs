@@ -3,8 +3,7 @@ using MCM.Abstractions.Attributes.v1;
 using MCM.Abstractions.Attributes.v2;
 using MCM.Abstractions.Base.Global;
 
-namespace BetterHorses.Settings
-{
+namespace BetterHorses.Settings {
     public class MCMSettings : AttributeGlobalSettings<MCMSettings> {
 
         [SettingPropertyGroup(Strings.RearingText)]

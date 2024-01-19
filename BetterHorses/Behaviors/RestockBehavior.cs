@@ -1,7 +1,5 @@
 ﻿using BetterCore.Utils;
-using BetterHorses.Settings;
 using HarmonyLib;
-using MCM.Abstractions.Base.Global;
 using System.Reflection;
 using TaleWorlds.Core;
 using TaleWorlds.InputSystem;
