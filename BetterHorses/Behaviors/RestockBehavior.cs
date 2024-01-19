@@ -1,5 +1,7 @@
 ﻿using BetterCore.Utils;
+using BetterHorses.Settings;
 using HarmonyLib;
+using MCM.Abstractions.Base.Global;
 using System.Reflection;
 using TaleWorlds.Core;
 using TaleWorlds.InputSystem;
@@ -10,20 +12,23 @@ using TaleWorlds.MountAndBlade.ViewModelCollection;
 
 namespace BetterHorses.Behaviors {
     internal class RestockBehavior : MissionBehavior {
-        Agent horseAgent;
-        Agent userAgent;
+        Agent? horseAgent;
+        Agent? player;
         bool hasFocus = false;
-        AgentInteractionInterfaceVM intInterface;
+        AgentInteractionInterfaceVM? intInterface;
         int timesStocked = 0;
         int restockTimes = 0;
         public override MissionBehaviorType BehaviorType => MissionBehaviorType.Other;
 
         public override void OnDeploymentFinished() {
             base.OnDeploymentFinished();
-            userAgent = Mission.Current.MainAgent;
+
+
+
+            player = Mission.Current.MainAgent;
 
             if (Mission.Current.MainAgent.MountAgent != null) {
-                horseAgent = userAgent.MountAgent;
+                horseAgent = player.MountAgent;
             }
 
             restockTimes = BetterHorses.Settings.StockTimes;
@@ -36,6 +41,8 @@ namespace BetterHorses.Behaviors {
 
         public override void OnFocusGained(Agent agent, IFocusable focusableObject, bool isInteractable) {
             base.OnFocusGained(agent, focusableObject, isInteractable);
+            if (intInterface == null)
+                return;
 
             if (focusableObject == horseAgent) {
                 hasFocus = true;
@@ -58,12 +65,14 @@ namespace BetterHorses.Behaviors {
 
         public override void OnMissionTick(float dt) {
             base.OnMissionTick(dt);
+            if (player == null)
+                return;
 
             if (hasFocus && Input.IsKeyPressed(BetterHorses.StockKey) && timesStocked <= restockTimes) {
                 for (EquipmentIndex equipmentIndex = EquipmentIndex.WeaponItemBeginSlot; equipmentIndex < EquipmentIndex.NumAllWeaponSlots; equipmentIndex++) {
-                    if (!userAgent.Equipment[equipmentIndex].IsEmpty && (userAgent.Equipment[equipmentIndex].CurrentUsageItem.WeaponClass == WeaponClass.Arrow || userAgent.Equipment[equipmentIndex].CurrentUsageItem.WeaponClass == WeaponClass.Bolt) && userAgent.Equipment[equipmentIndex].Amount < userAgent.Equipment[equipmentIndex].ModifiedMaxAmount) {
-                        userAgent.SetWeaponAmountInSlot(equipmentIndex, userAgent.Equipment[equipmentIndex].ModifiedMaxAmount, true);
-                        NotifyHelper.ChatMessage("Ammo restocked!", MsgType.Good);
+                    if (!player.Equipment[equipmentIndex].IsEmpty && (player.Equipment[equipmentIndex].CurrentUsageItem.WeaponClass == WeaponClass.Arrow || player.Equipment[equipmentIndex].CurrentUsageItem.WeaponClass == WeaponClass.Bolt) && player.Equipment[equipmentIndex].Amount < player.Equipment[equipmentIndex].ModifiedMaxAmount) {
+                        player.SetWeaponAmountInSlot(equipmentIndex, player.Equipment[equipmentIndex].ModifiedMaxAmount, true);
+                        NotifyHelper.WriteMessage("Ammo restocked!", MsgType.Good);
                         timesStocked++;
                     }
                 }

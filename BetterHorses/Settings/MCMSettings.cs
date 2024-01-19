@@ -79,12 +79,10 @@ namespace BetterHorses.Settings
         //public bool MountsSlowDown { get; set; } = false;
 
 
-
         public override string Id { get { return base.GetType().Assembly.GetName().Name; } }
         public override string DisplayName { get { return base.GetType().Assembly.GetName().Name; } }
         public override string FolderName { get { return base.GetType().Assembly.GetName().Name; } }
         public override string FormatType { get; } = "xml";
-        public bool LoadMCMConfigFile { get; set; } = true;
     }
 }
 

@@ -31,7 +31,7 @@ namespace BetterHorses {
 
                 isInitialized = true;
             } catch (Exception e) {
-                NotifyHelper.ReportError(ModName, "OnSubModuleLoad threw exception " + e);
+                NotifyHelper.WriteError(ModName, "OnSubModuleLoad threw exception " + e);
             }
         }
 
@@ -47,7 +47,7 @@ namespace BetterHorses {
 
                 Settings = MCMSettings.Instance ?? throw new NullReferenceException("Settings are null");
 
-                NotifyHelper.ChatMessage(ModName + " Loaded.", MsgType.Good);
+                NotifyHelper.WriteMessage(ModName + " Loaded.", MsgType.Good);
 
                 RegisterCallKey();
                 RegisterStockKey();
@@ -56,7 +56,7 @@ namespace BetterHorses {
 
                 isLoaded = true;
             } catch (Exception e) {
-                NotifyHelper.ReportError(ModName, "OnBeforeInitialModuleScreenSetAsRoot threw exception " + e);
+                NotifyHelper.WriteError(ModName, "OnBeforeInitialModuleScreenSetAsRoot threw exception " + e);
             }
         }
 
@@ -70,9 +70,14 @@ namespace BetterHorses {
 			if (Settings.InvulnerableMount) {
 				mission.AddMissionBehavior(new GodHorse());
 			}
-;
-			mission.AddMissionBehavior(new HorseRegen());
-            mission.AddMissionBehavior(new RestockBehavior());
+
+            if (Settings.AllowRegen) {
+                mission.AddMissionBehavior(new HorseRegen());
+            }
+
+            if (Settings.AllowResstocking) {
+                mission.AddMissionBehavior(new RestockBehavior());
+            }
         }
 
         public static void RegisterCallKey() {
@@ -84,7 +89,7 @@ namespace BetterHorses {
                     throw new Exception();
                 }
             } catch (Exception e) {
-                NotifyHelper.ReportError(ModName, "Register call key exception: " + e);
+                NotifyHelper.WriteError(ModName, "Register call key exception: " + e);
             }
         }
 
@@ -97,7 +102,7 @@ namespace BetterHorses {
                     throw new Exception();
                 }
             } catch (Exception e) {
-                NotifyHelper.ReportError(ModName, "Register stock key exception: " + e);
+                NotifyHelper.WriteError(ModName, "Register stock key exception: " + e);
             }
         }
     }

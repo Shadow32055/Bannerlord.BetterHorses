@@ -14,61 +14,51 @@ namespace BetterHorses.Behaviors {
 			base.OnMissionTick(dt);
 
 			try {
-				Mission mission = Mission.Current;
-				if (mission != null && mission.MainAgent != null) {
 
+                if (Mission.Current == null)
+                    return;
 
-					if (BetterHorses.Settings.MountHealthRegenAmount > 0) {
-						if (mission.MainAgent.HasMount) {
-							if (this.nextHealMount.IsPast) {
+				if (Mission.Current.MainAgent == null)
+					return;
 
-								if (tookDamageMount) {
-									tookDamageMount = false;
-								}
+				if (!Mission.Current.MainAgent.HasMount)
+					return;
 
-								if (this.lastHealthMount > mission.MainAgent.MountAgent.Health) {
-									tookDamageMount = true;
-									this.nextHealMount = MissionTime.SecondsFromNow(BetterHorses.Settings.MountRegenDamageDelay);
-								} else {
-									this.nextHealMount = MissionTime.SecondsFromNow(BetterHorses.Settings.MountHealthRegenInterval);
+				if (BetterHorses.Settings.MountHealthRegenAmount == 0)
+					return;
+		
+						
+				if (this.nextHealMount.IsPast) {
 
-									float healAmount = BetterHorses.Settings.MountHealthRegenAmount;
-
-								
-
-									Regenerate(mission.MainAgent.MountAgent, healAmount);
-
-								}
-								this.lastHealthMount = mission.MainAgent.MountAgent.Health;
-							}
-						}
+					if (tookDamageMount) {
+						tookDamageMount = false;
 					}
 
-				} else {
-					this.nextHealMount = MissionTime.Zero;
+					if (this.lastHealthMount > Mission.Current.MainAgent.MountAgent.Health) {
+						tookDamageMount = true;
+						this.nextHealMount = MissionTime.SecondsFromNow(BetterHorses.Settings.MountRegenDamageDelay);
+					} else {
+						this.nextHealMount = MissionTime.SecondsFromNow(BetterHorses.Settings.MountHealthRegenInterval);
+
+						float healAmount = BetterHorses.Settings.MountHealthRegenAmount;
+
+						Regenerate(Mission.Current.MainAgent.MountAgent, healAmount);
+
+					}
+					this.lastHealthMount = Mission.Current.MainAgent.MountAgent.Health;
 				}
 			} catch (Exception e) {
-				NotifyHelper.ReportError(BetterHorses.ModName, "Problem with health regen, cause: " + e);
+				NotifyHelper.WriteError(BetterHorses.ModName, "Problem with health regen, cause: " + e);
 			}
 		}
 
 		private void Regenerate(Agent agent, float amount) {
 			if (agent.Health < agent.HealthLimit) {
-				float healAmount = GetHealAmount(amount, agent);
+				float healAmount = HealthHelper.GetMaxHealAmount(amount, agent);
 
-				
 				agent.Health += healAmount;
-				agent.UpdateAgentStats();
-				//agent.SetAgentDrivenPropertyValueFromConsole(TaleWorlds.Core.DrivenProperty.MountSpeed, 10);
+				//agent.UpdateAgentStats();
 			}
-		}
-
-		public float GetHealAmount(float healAmount, Agent agent) {
-			if ((healAmount + agent.Health) > agent.HealthLimit) {
-				return agent.HealthLimit - agent.Health;
-			}
-
-			return healAmount;
 		}
 	}
 }

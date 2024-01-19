@@ -1,4 +1,8 @@
-﻿using TaleWorlds.MountAndBlade;
+﻿using BetterCore.Utils;
+using BetterHorses.Settings;
+using MCM.Abstractions.Base.Global;
+using System;
+using TaleWorlds.MountAndBlade;
 
 namespace BetterHorses.Behaviors {
     class GodHorse : MissionBehavior {
@@ -7,12 +11,15 @@ namespace BetterHorses.Behaviors {
 
         public override void OnAgentHit(Agent affectedAgent, Agent affectorAgent, in MissionWeapon affectorWeapon, in Blow blow, in AttackCollisionData attackCollisionData) {
             base.OnAgentHit(affectedAgent, affectorAgent, affectorWeapon, blow, attackCollisionData);
+            try {
+                if (!BetterHorses.Settings.InvulnerableMount)
+                    return;
 
-            if (!BetterHorses.Settings.InvulnerableMount)
-                return;
-
-            if (affectedAgent == Agent.Main.MountAgent) {
-                Agent.Main.MountAgent.Health = Agent.Main.MountAgent.HealthLimit;
+                if (affectedAgent == Agent.Main.MountAgent) {
+                    Agent.Main.MountAgent.Health = Agent.Main.MountAgent.HealthLimit;
+                }
+            } catch (Exception e) {
+                NotifyHelper.WriteError(BetterHorses.ModName, "GodHorse.OnAgentHit threw exception: " + e);
             }
         }
     }

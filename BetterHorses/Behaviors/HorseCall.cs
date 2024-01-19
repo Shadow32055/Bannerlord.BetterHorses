@@ -30,12 +30,13 @@ namespace BetterHorses.Behaviors
             stayPosition = horseAgent.GetWorldPosition();
         }
 
-        public override void AfterStart() {
-            base.AfterStart();
+        public override void OnDeploymentFinished() {
+            base.OnDeploymentFinished();
 
             if (Mission.Current.MainAgent.HasMount)
                 horseAgent = Mission.Current.MainAgent.MountAgent;
         }
+
         public override void OnMissionTick(float dt) {
             base.OnMissionTick(dt);
             try {
