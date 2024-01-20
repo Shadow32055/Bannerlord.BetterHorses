@@ -10,7 +10,7 @@ namespace BetterHorses {
     public class BetterHorses : MBSubModuleBase {
 
         public static InputKey CallKey { get; private set; }  = InputKey.Q;
-        public static InputKey StockKey { get; private set; } = InputKey.E;
+        public static InputKey StockKey { get; private set; } = InputKey.F;
         public static MCMSettings Settings { get; private set; }
         public static string ModName { get; private set; } = "BetterHorses";
 

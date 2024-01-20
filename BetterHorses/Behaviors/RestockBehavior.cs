@@ -21,8 +21,6 @@ namespace BetterHorses.Behaviors {
         public override void OnDeploymentFinished() {
             base.OnDeploymentFinished();
 
-
-
             player = Mission.Current.MainAgent;
 
             if (Mission.Current.MainAgent.MountAgent != null) {

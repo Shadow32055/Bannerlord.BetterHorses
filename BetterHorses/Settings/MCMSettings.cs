@@ -72,7 +72,7 @@ namespace BetterHorses.Settings {
 
         [SettingPropertyGroup(Strings.RestockText)]
         [SettingProperty(Strings.KeyText, Order = 0, RequireRestart = true, HintText = Strings.KeyHint)]
-        public string StockKey { get; set; } = "E";
+        public string StockKey { get; set; } = "F";
 
         //[SettingPropertyBool("Mount speed based on health", Order = 0, RequireRestart = false, HintText = "Whether mounts slow down based on health. 50% health means horse moves at 50% speed")]
         //public bool MountsSlowDown { get; set; } = false;

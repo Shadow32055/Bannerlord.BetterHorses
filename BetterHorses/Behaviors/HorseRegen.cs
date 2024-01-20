@@ -5,8 +5,7 @@ using TaleWorlds.MountAndBlade;
 namespace BetterHorses.Behaviors {
     class HorseRegen : MissionBehavior {
 		private float lastHealthMount;
-		private bool tookDamageMount;
-		private MissionTime nextHealMount;
+		private MissionTime nextHealMount = MissionTime.Zero;
 
 		public override MissionBehaviorType BehaviorType => MissionBehaviorType.Other;
 
@@ -26,23 +25,20 @@ namespace BetterHorses.Behaviors {
 
 				if (BetterHorses.Settings.MountHealthRegenAmount == 0)
 					return;
-		
-						
+
+				if (Mission.Current.MainAgent.MountAgent.Health == Mission.Current.MainAgent.MountAgent.HealthLimit)
+					return;
+				
+
 				if (this.nextHealMount.IsPast) {
 
-					if (tookDamageMount) {
-						tookDamageMount = false;
-					}
-
 					if (this.lastHealthMount > Mission.Current.MainAgent.MountAgent.Health) {
-						tookDamageMount = true;
+					
 						this.nextHealMount = MissionTime.SecondsFromNow(BetterHorses.Settings.MountRegenDamageDelay);
 					} else {
 						this.nextHealMount = MissionTime.SecondsFromNow(BetterHorses.Settings.MountHealthRegenInterval);
 
-						float healAmount = BetterHorses.Settings.MountHealthRegenAmount;
-
-						Regenerate(Mission.Current.MainAgent.MountAgent, healAmount);
+						Regenerate(Mission.Current.MainAgent.MountAgent, BetterHorses.Settings.MountHealthRegenAmount);
 
 					}
 					this.lastHealthMount = Mission.Current.MainAgent.MountAgent.Health;

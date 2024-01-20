@@ -26,7 +26,9 @@ namespace BetterHorses.Behaviors {
             if (horseAgent == null)
                 return;
 
+            horseStay = true;
             stayPosition = horseAgent.GetWorldPosition();
+            NotifyHelper.WriteMessage(new TextObject(Strings.StayText).ToString(), MsgType.Good);
         }
 
         public override void OnDeploymentFinished() {
@@ -57,6 +59,9 @@ namespace BetterHorses.Behaviors {
                     }
                 }
 
+                if (Mission.Current.MainAgent.HasMount)
+                    return;
+
                 if (Input.IsKeyPressed(BetterHorses.CallKey)) {
                     horseStay = !horseStay;
 
@@ -65,7 +70,7 @@ namespace BetterHorses.Behaviors {
                         MoveHorse(Mission.Current.MainAgent.GetWorldPosition());
                     } else {
                         NotifyHelper.WriteMessage(new TextObject(Strings.StayText).ToString(), MsgType.Good);
-                        stayPosition = horseAgent.GetWorldPosition();
+                        stayPosition = Mission.Current.MainAgent.GetWorldPosition();
 
                     }
                 }
