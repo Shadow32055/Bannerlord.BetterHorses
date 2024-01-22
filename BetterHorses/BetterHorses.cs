@@ -11,7 +11,7 @@ namespace BetterHorses {
 
         public static InputKey CallKey { get; private set; }  = InputKey.Q;
         public static InputKey StockKey { get; private set; } = InputKey.F;
-        public static MCMSettings Settings { get; private set; }
+        public static MCMSettings Settings { get; private set; } = new MCMSettings();
         public static string ModName { get; private set; } = "BetterHorses";
 
         private bool isInitialized = false;
