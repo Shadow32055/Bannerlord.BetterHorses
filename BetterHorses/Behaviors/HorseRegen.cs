@@ -28,20 +28,18 @@ namespace BetterHorses.Behaviors {
 
 				if (Mission.Current.MainAgent.MountAgent.Health == Mission.Current.MainAgent.MountAgent.HealthLimit)
 					return;
-				
 
-				if (this.nextHealMount.IsPast) {
+                if (nextHealMount.IsPast) {
+                    if (lastHealthMount > Mission.Current.MainAgent.Health) {
+                        nextHealMount = MissionTime.SecondsFromNow(BetterHorses.Settings.MountRegenDamageDelay);
+                        lastHealthMount = Mission.Current.MainAgent.Health;
+                    }
+                    nextHealMount = MissionTime.SecondsFromNow(1);
+                }
 
-					if (this.lastHealthMount > Mission.Current.MainAgent.MountAgent.Health) {
-					
-						this.nextHealMount = MissionTime.SecondsFromNow(BetterHorses.Settings.MountRegenDamageDelay);
-					} else {
-						this.nextHealMount = MissionTime.SecondsFromNow(BetterHorses.Settings.MountHealthRegenInterval);
-
-						Regenerate(Mission.Current.MainAgent.MountAgent, BetterHorses.Settings.MountHealthRegenAmount);
-
-					}
-					this.lastHealthMount = Mission.Current.MainAgent.MountAgent.Health;
+				if (nextHealMount.IsPast) {
+					nextHealMount = MissionTime.SecondsFromNow(BetterHorses.Settings.MountHealthRegenInterval);
+					Regenerate(Mission.Current.MainAgent, BetterHorses.Settings.MountHealthRegenAmount);
 				}
 			} catch (Exception e) {
 				NotifyHelper.WriteError(BetterHorses.ModName, "Problem with health regen, cause: " + e);
