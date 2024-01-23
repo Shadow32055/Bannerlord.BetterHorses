@@ -44,6 +44,9 @@ namespace BetterHorses.Behaviors {
                 if (Mission.Current == null)
                     return;
 
+                if (Mission.Current.MainAgent == null)
+                    return;
+
                 if (horseAgent == null)
                     return;
 
