@@ -41,5 +41,9 @@
         public const string AllowRestockHint = "{=BHR_LK0Y2X}Should you be able to get ammo back from your mount";
         public const string RestockTimesText = "{=BHR_8GKCt3}Restock times";
         public const string RestockTimesHint = "{=BHR_SPUG8I}How many times can you get ammo from your horse";
+
+        public const string RestockAmountLeft = "{=BHR_kdjbq0}ammo restocks available";
+        public const string RestockEmpty = "{=BHR_aj290d}No more ammo restocks available";
+        public const string RestockComplete = "{=BHR_aja30d}Ammo restocked!";
     }
 }

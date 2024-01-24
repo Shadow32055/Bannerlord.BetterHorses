@@ -77,7 +77,6 @@ namespace BetterHorses.Settings {
         //[SettingPropertyBool("Mount speed based on health", Order = 0, RequireRestart = false, HintText = "Whether mounts slow down based on health. 50% health means horse moves at 50% speed")]
         //public bool MountsSlowDown { get; set; } = false;
 
-
         public override string Id { get { return base.GetType().Assembly.GetName().Name; } }
         public override string DisplayName { get { return base.GetType().Assembly.GetName().Name; } }
         public override string FolderName { get { return base.GetType().Assembly.GetName().Name; } }

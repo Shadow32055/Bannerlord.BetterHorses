@@ -44,5 +44,8 @@
 		<string id="BHR_LK0Y2X" text="Should you be able to get ammo back from your mount"/>
 		<string id="BHR_8GKCt3" text="Restock times"/>
 		<string id="BHR_SPUG8I" text="How many times can you get ammo from your horse"/>
+		<string id="BHR_kdjbq0" text="ammo restocks available"/>
+		<string id="BHR_aj290d" text="No more ammo restocks available"/>
+		<string id="BHR_aja30d" text="Ammo restocked!"/>
 	</strings>
 </base>

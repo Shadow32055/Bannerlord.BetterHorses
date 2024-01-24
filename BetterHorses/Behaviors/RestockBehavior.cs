@@ -43,9 +43,9 @@ namespace BetterHorses.Behaviors {
             if (focusableObject == horseAgent) {
                 hasFocus = true;
                 if (timesStocked <= restockTimes) {
-                    intInterface.SecondaryInteractionMessage = new TextObject((restockTimes - timesStocked) + " ammo restocks avaiable").ToString();
+                    intInterface.SecondaryInteractionMessage = (restockTimes - timesStocked) + " " +  new TextObject(Strings.RestockAmountLeft).ToString();
                 } else {
-                    intInterface.SecondaryInteractionMessage = new TextObject("No more ammo restocks avaiable").ToString();
+                    intInterface.SecondaryInteractionMessage = new TextObject(Strings.RestockEmpty).ToString();
                 }
                 intInterface.IsActive = true;
             }
@@ -66,9 +66,9 @@ namespace BetterHorses.Behaviors {
 
             if (hasFocus && Input.IsKeyPressed(BetterHorses.StockKey) && timesStocked <= restockTimes) {
                 for (EquipmentIndex equipmentIndex = EquipmentIndex.WeaponItemBeginSlot; equipmentIndex < EquipmentIndex.NumAllWeaponSlots; equipmentIndex++) {
-                    if (!player.Equipment[equipmentIndex].IsEmpty && (player.Equipment[equipmentIndex].CurrentUsageItem.WeaponClass == WeaponClass.Arrow || player.Equipment[equipmentIndex].CurrentUsageItem.WeaponClass == WeaponClass.Bolt) && player.Equipment[equipmentIndex].Amount < player.Equipment[equipmentIndex].ModifiedMaxAmount) {
+                    if (!player.Equipment[equipmentIndex].IsEmpty && (player.Equipment[equipmentIndex].CurrentUsageItem.WeaponClass == WeaponClass.Arrow || player.Equipment[equipmentIndex].CurrentUsageItem.WeaponClass == WeaponClass.Bolt || player.Equipment[equipmentIndex].CurrentUsageItem.WeaponClass == WeaponClass.Javelin || player.Equipment[equipmentIndex].CurrentUsageItem.WeaponClass == WeaponClass.ThrowingAxe || player.Equipment[equipmentIndex].CurrentUsageItem.WeaponClass == WeaponClass.ThrowingKnife) && player.Equipment[equipmentIndex].Amount < player.Equipment[equipmentIndex].ModifiedMaxAmount) {
                         player.SetWeaponAmountInSlot(equipmentIndex, player.Equipment[equipmentIndex].ModifiedMaxAmount, true);
-                        NotifyHelper.WriteMessage("Ammo restocked!", MsgType.Good);
+                        NotifyHelper.WriteMessage(new TextObject(Strings.RestockComplete).ToString(), MsgType.Good);
                         timesStocked++;
                     }
                 }
