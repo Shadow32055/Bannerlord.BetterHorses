@@ -13,6 +13,12 @@ namespace BetterHorses.Behaviors {
                 if (!BetterHorses.Settings.InvulnerableMount)
                     return;
 
+                if (Agent.Main == null)
+                    return;
+
+                if (Agent.Main.MountAgent == null)
+                    return;
+
                 if (affectedAgent == Agent.Main.MountAgent) {
                     Agent.Main.MountAgent.Health = Agent.Main.MountAgent.HealthLimit;
                 }
