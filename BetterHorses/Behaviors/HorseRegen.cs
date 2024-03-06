@@ -51,7 +51,7 @@ namespace BetterHorses.Behaviors {
 
 		private void Regenerate(Agent agent, float amount) {
 			if (agent.Health < agent.HealthLimit) {
-				float healAmount = HealthHelper.GetMaxHealAmount(amount, agent);
+				float healAmount = HealthHelper.HealAgent(agent, amount);
 
 				agent.Health += healAmount;
 				//agent.UpdateAgentStats();
